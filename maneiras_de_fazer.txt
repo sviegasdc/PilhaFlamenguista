@@ -11,3 +11,21 @@ public E pop()
     }
 
 }
+
+isEmpty e afins
+ 
+public class Test { 
+    public static void main(String[] args) 
+    { 
+        try { 
+            int a = 20 / 0; 
+        } 
+        catch (Exception e) { 
+            // toString method 
+            System.out.println(e.toString()); 
+  
+            // OR 
+            // System.out.println(e); 
+        } 
+    } 
+}
