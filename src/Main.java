@@ -26,79 +26,87 @@ class PilhaFlamenguista {
     private int topoPreto;
     private int PilhaF[];
 
-    public PilhaFlamenguista(int tamanho){
-        this.PilhaF = new int[tamanho];
-        this.topoVermelho = -1; // começo do array
-        this.topoPreto = tamanho; // topop = começo da pilha preta
+    public PilhaFlamenguista(int size) {
+        this.PilhaF = new int[size];
+        this.topoVermelho = -1; // começo do array (tentar com < 0)
+        this.topoPreto = size; // topop = começo da pilha preta
     }
 
     // adicionar elementos (vermelhos) antes do topov
-    public void pushPilhaVermelha(int elemento){
-        if (topoVermelho +1 != topoPreto){
+    public void pushPilhaVermelha(int elemento) {
+        if (topoVermelho + 1 != topoPreto) {
             topoVermelho++; // indo pra próxima posição pra depois inserir
             this.PilhaF[topoVermelho] = elemento;
-        }
-        else{
-            System.out.printf("Pilha Vermelha chegou ao topo, não é possível fazer a inserção do elemento '%d'.\n",elemento);
+        } else {
+            System.out.printf("Pilha Vermelha chegou ao topo, não é possível fazer a inserção do elemento '%d'.\n", elemento);
         }
     }
+
     // adicionar elementos (pretos) depois do topov
     public void pushPilhaPreta(int elemento) {
         if (topoPreto - 1 != topoVermelho) {
             topoPreto--; // indo para próxima posição para depois inserir
-            this.PilhaF[topoPreto] = elemento; //topo do preto é o final do array
+            this.PilhaF[topoPreto] = elemento; // topo do preto é o final do array
         } else {
             System.out.printf("Pilha Preta chegou ao topo, não é possível fazer a inserção do elemento '%d'\n", elemento);
         }
     }
-    public int popPilhaVermelha(){
-        if (topoVermelho != -1){
-            int elementoASerRemovido = this.PilhaF[topoVermelho];
-            this.PilhaF[topoVermelho] = 0;
-            this.topoVermelho--;
-            return elementoASerRemovido;
-        }
-        else{
-          throws PilhaVaziaExcecao;
-        }
-    }
+
     public class PilhaVaziaExcecao extends RuntimeException {
-        public PilhaVaziaExcecao(String err){
-        super(err);
+        public PilhaVaziaExcecao(String err) {
+            super(err);
         }
     }
 
-    // imprimir o array
+    public int popPilhaVermelha() {
+        if (topoVermelho < 0){ // if isEmpty
+            throw new PilhaVaziaExcecao("massas");
+            // System.out.println("Não foi possível remover nenhm elemento pois a pilha vermelha está vazia");
+            // return 0; // -1 (por que?)
+        } else {
+            int elementoParaRemover = this.PilhaF[topoVermelho];
+            this.PilhaF[topoVermelho] = 0; // substitui o elemento removido por 0
+            // t ← t − 1
+            this.topoVermelho--; // volta uma "casa" para ter um novo topo
+            return elementoParaRemover;
+        }
+    }
+    public int popPilhaPreta() {
+        if (topoPreto == PilhaF.length){ // if isEmpty
+            // throw PilhaVaziaExcecao; //como???
+            System.out.println("Não foi possível remover nenhum elemento pois a pilha preta está vazia");
+            return 0; // -1 (por que?)
+        } else {
+            int elementoParaRemover = this.PilhaF[topoPreto];
+            this.PilhaF[topoPreto] = 0; // substitui o elemento removido por 0
+            // t ← t − 1
+            this.topoPreto++; // volta uma "casa" para ter um novo topo
+            return elementoParaRemover;
+        }
+    }
+
+    // escrever o array com os elementos das pilhas
     @Override
-    public String toString(){
+    public String toString() {
         String saida = "[ ";
-        for (int elemento : this.PilhaF){
+        for (int elemento : this.PilhaF) {
             saida += String.format("%d ", elemento);
         }
         saida += "]";
         return saida;
     }
 }
-
-/*
-if PilhaF cheia{
- int ArrayNovo[] = new int[len*2];
-}
-*/
-
-class testePilha {
+class Main {
     public static void main(String[] args) {
         // tamanho = N > pilhav(5) + pilhap(5)
-        PilhaFlamenguista PilhaF = new PilhaFlamenguista(15);
+        PilhaFlamenguista PilhaF = new PilhaFlamenguista(10);
         //   System.out.println("inserindo");
         //   for(int f=0;f<10;f++){
-        //   System.out.println(f);
+        //   System.ut.println(f);
         //   pilha.pushPilhaVermelha(new Integer(f));
         // }
-       PilhaF.pushPilhaVermelha(10);
-       PilhaF.pushPilhaPreta(11);
-       PilhaF.pushPilhaPreta(12);
-       PilhaF.pushPilhaPreta(13);
-       System.out.print(PilhaF);
+        System.out.print(PilhaF);
+
+
     }
 }
