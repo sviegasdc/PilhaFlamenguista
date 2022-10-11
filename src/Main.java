@@ -28,7 +28,7 @@ class PilhaFlamenguista {
 
     public PilhaFlamenguista(int tamanho){
         this.PilhaF = new int[tamanho];
-        this.topoVermelho = -1; // começo do array
+        this.topoVermelho = -1; // começo do array (tentar com < 0)
         this.topoPreto = tamanho; // topop = começo da pilha preta
     }
 
@@ -44,7 +44,7 @@ class PilhaFlamenguista {
     }
     // adicionar elementos (pretos) depois do topov
     public void pushPilhaPreta(int elemento) {
-        if (topoPreto - 1 != topoVermelho) {
+        if (topoPreto - 1 != topoVermelho) { (
             topoPreto--; // indo para próxima posição para depois inserir
             this.PilhaF[topoPreto] = elemento; //topo do preto é o final do array
         } else {
@@ -52,7 +52,7 @@ class PilhaFlamenguista {
         }
     }
     public int popPilhaVermelha(){
-        if (topoVermelho != -1){
+        if (topoVermelho != -1){ // (tentar com < 0)
             int elementoASerRemovido = this.PilhaF[topoVermelho];
             this.PilhaF[topoVermelho] = 0;
             this.topoVermelho--;
