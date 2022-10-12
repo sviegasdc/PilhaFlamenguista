@@ -7,24 +7,17 @@
  * PUSH = insere um novo elemento no topo da pilha
  * TOP = acessa o elemento posicionado no topo da pilha
  */
-//cu
-//public interface Pilha {
-//    public int size();
-//    public boolean isEmpty();
-//    public Object top() throws PilhaVaziaExcecao;
-//    public void pushpushPilhaVermelha(int elemento);
-//    public void pushPilhaPreta(int elemento);
-//    public Object pop() throws PilhaVaziaExcecao;
-//    implements Pilha
-//}
+
+
 class PilhaFlamenguista {
-    // deve conter duas pilhas, pilhav e pilhap
-    // apenas um array com capacidade n > pilhav + pilhap
-    // pilhav começo e pilhap final do array
+    // deve conter duas pilhas, pilhav e pilhap X
+    // apenas um array com capacidade n > pilhav + pilhap X
+    // pilhav começo e pilhap final do array X
     // quando array cheio tam array * 2
     private int topoVermelho;
     private int topoPreto;
     private int PilhaF[];
+
 
     public PilhaFlamenguista(int size) {
         this.PilhaF = new int[size];
@@ -60,9 +53,7 @@ class PilhaFlamenguista {
 
     public int popPilhaVermelha() {
         if (topoVermelho < 0){ // if isEmpty
-            throw new PilhaVaziaExcecao("massas");
-            // System.out.println("Não foi possível remover nenhm elemento pois a pilha vermelha está vazia");
-            // return 0; // -1 (por que?)
+            throw new PilhaVaziaExcecao("Não foi possível remover nenhum elemento pois a pilha vermelha está vazia");
         } else {
             int elementoParaRemover = this.PilhaF[topoVermelho];
             this.PilhaF[topoVermelho] = 0; // substitui o elemento removido por 0
@@ -73,9 +64,7 @@ class PilhaFlamenguista {
     }
     public int popPilhaPreta() {
         if (topoPreto == PilhaF.length){ // if isEmpty
-            // throw PilhaVaziaExcecao; //como???
-            System.out.println("Não foi possível remover nenhum elemento pois a pilha preta está vazia");
-            return 0; // -1 (por que?)
+            throw new PilhaVaziaExcecao("Não foi possível remover nenhum elemento pois a pilha preta está vazia");
         } else {
             int elementoParaRemover = this.PilhaF[topoPreto];
             this.PilhaF[topoPreto] = 0; // substitui o elemento removido por 0
@@ -95,17 +84,51 @@ class PilhaFlamenguista {
         saida += "]";
         return saida;
     }
+//    private void duplicaArray(){
+//        int novoArray[] = new
+//    }
 }
 class Main {
     public static void main(String[] args) {
-        // tamanho = N > pilhav(5) + pilhap(5)
+        // tamanho = N > pilhav(3) + pilhap(5)
         PilhaFlamenguista PilhaF = new PilhaFlamenguista(10);
-        //   System.out.println("inserindo");
-        //   for(int f=0;f<10;f++){
-        //   System.ut.println(f);
-        //   pilha.pushPilhaVermelha(new Integer(f));
-        // }
-        System.out.print(PilhaF);
+
+        // inserir elementos na pilha vermelha
+        System.out.println("inserindo");
+        for(int elemento = 1; elemento <= 3; elemento++){
+            System.out.println("->" + elemento);
+            PilhaF.pushPilhaVermelha(elemento);
+        }
+        System.out.println(PilhaF);
+
+
+        // inserir elementos na pilha preta
+        System.out.println("inserindo");
+        for(int elemento = 1; elemento <= 3; elemento++){
+            System.out.println("->" + elemento);
+            PilhaF.pushPilhaPreta(elemento);
+        }
+        System.out.println(PilhaF);
+
+
+        // removendo elementos na pilha vermelha
+        System.out.println(PilhaF);
+        System.out.println("retirando:");
+        for(int elemento = 1; elemento <= 5; elemento++) {
+            System.out.print(" - "+PilhaF.popPilhaVermelha());
+            System.out.println();
+        }
+        System.out.println(PilhaF);
+
+
+        // removendo elementos na pilha preta
+        System.out.println(PilhaF);
+        System.out.println("retirando:");
+        for(int elemento = 1; elemento <= 5; elemento++) {
+            System.out.print(" - "+PilhaF.popPilhaPreta());
+            System.out.println();
+        }
+        System.out.println(PilhaF);
 
 
     }
