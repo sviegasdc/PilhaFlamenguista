@@ -74,6 +74,14 @@ class PilhaFlamenguista {
             return elementoParaRemover;
         }
     }
+    public int topPilhaVermelha(){
+        return topoVermelho;
+    }
+
+    public int topPilhaPreta(){
+        return topoPreto;
+
+    }
 
     // escrever o array com os elementos das pilhas
     @Override
@@ -158,5 +166,9 @@ class Main {
 //            PilhaF.pushPilhaPreta(elemento);
 //        }
 //        System.out.println(PilhaF);
+//
+//        // testando os topos
+//        System.out.println(PilhaF.topPilhaVermelha());
+//        System.out.println(PilhaF.topPilhaPreta());
     }
 }
